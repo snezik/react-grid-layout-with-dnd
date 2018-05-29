@@ -25,6 +25,9 @@ const boxTarget = {
 	drop() {
 		return { name: 'Dustbin' }
 	},
+	hover(props, monitor, component){
+		return {name: 'test'}
+	}
 };
 
 // export interface DustbinProps {

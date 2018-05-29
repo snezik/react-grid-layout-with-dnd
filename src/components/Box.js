@@ -4,8 +4,7 @@ import {
 	ConnectDragSource,
 	DragSource,
 	DragSourceConnector,
-	DragSourceMonitor,
-	DropTarget
+	DragSourceMonitor
 } from 'react-dnd'
 import ItemTypes from './ItemTypes'
 
@@ -26,13 +25,13 @@ const style = {
 // }
 
 const boxSource = {
-	drop(props) {
+	beginDrag(props) {
 		return {
 			name: props.name,
 		}
 	},
 
-	canDrop(props, monitor) {
+	endDrag(props, monitor) {
 		const item = monitor.getItem();
 		const dropResult = monitor.getDropResult();
 
@@ -68,7 +67,7 @@ class Box extends React.Component{
 		)
 	}
 }
-export default DropTarget(ItemTypes.BOX, boxSource, (connect, monitor) => ({
-	connectDragSource: connect.dropTarget(),
-	isDragging: monitor.canDrop(),
+export default DragSource(ItemTypes.BOX, boxSource, (connect, monitor) => ({
+	connectDragSource: connect.dragSource(),
+	isDragging: monitor.isDragging(),
 }))(Box);
